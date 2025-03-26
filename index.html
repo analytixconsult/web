@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataJuke - Solusi Analitik Modern</title>
+    <title>Nexa - Modern Digital Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* CSS Reset & Base Styles */
         :root {
-            --primary: #0066ff;
-            --primary-dark: #0052cc;
-            --primary-light: #4d94ff;
-            --secondary: #ff6600;
-            --dark: #1a1a1a;
-            --darker: #0d0d0d;
-            --light: #f5f5f5;
-            --gray: #666666;
-            --light-gray: #e6e6e6;
-            --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --dark: #1b263b;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --text: #212529;
+            --text-light: #6c757d;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
 
@@ -28,71 +27,74 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            color: var(--dark);
-            background-color: white;
+            color: var(--text);
+            background-color: var(--light);
             overflow-x: hidden;
         }
 
+        /* Typography */
         h1, h2, h3, h4 {
             line-height: 1.2;
+            margin-bottom: 1rem;
             font-weight: 700;
         }
 
         h1 {
-            font-size: 2.8rem;
+            font-size: 3.5rem;
         }
 
         h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
         }
 
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
         }
 
         p {
-            margin-bottom: 1.2rem;
-            color: var(--gray);
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
             max-width: 600px;
-            font-size: 1rem;
         }
 
         a {
             text-decoration: none;
+            color: var(--primary);
             transition: var(--transition);
         }
 
+        /* Utility Classes */
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 2rem;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.7rem 1.5rem;
+            padding: 0.8rem 1.8rem;
             background: var(--primary);
             color: white;
-            border-radius: 4px;
+            border-radius: 50px;
             font-weight: 600;
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 1rem;
             box-shadow: var(--shadow);
         }
 
         .btn:hover {
-            background: var(--primary-dark);
+            background: var(--secondary);
             transform: translateY(-2px);
         }
 
         .btn-outline {
             background: transparent;
-            border: 1px solid var(--primary);
+            border: 2px solid var(--primary);
             color: var(--primary);
         }
 
@@ -106,27 +108,42 @@
         }
 
         .section {
-            padding: 4rem 0;
+            padding: 6rem 0;
         }
 
         .section-title {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             position: relative;
             display: inline-block;
-            font-size: 2rem;
         }
 
-        /* Header */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Header & Navigation */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 1.5rem 0;
             transition: var(--transition);
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
             box-shadow: var(--shadow);
+            padding: 1rem 0;
         }
 
         .navbar {
@@ -136,7 +153,7 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--dark);
         }
@@ -147,171 +164,434 @@
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--dark);
-            font-weight: 500;
-            font-size: 0.9rem;
+            font-weight: 600;
+            position: relative;
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             color: var(--dark);
             cursor: pointer;
         }
 
-        /* Hero */
+        /* Hero Section */
         #hero {
-            padding: 7rem 0 4rem;
-            background: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-content {
             max-width: 600px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-image {
-            width: 100%;
-            max-width: 500px;
-            margin: 2rem auto 0;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 700px;
+            animation: float 6s ease-in-out infinite;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(-50%) translateX(-20px); }
+            100% { transform: translateY(-50%) translateX(0); }
         }
 
         .hero-btns {
             display: flex;
             gap: 1rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem;
         }
 
-        /* Services */
-        #services {
-            background: var(--light);
+        /* Features Section */
+        #features {
+            background-color: white;
+            position: relative;
+            overflow: hidden;
         }
 
-        .services-grid {
+        #features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.gifer.com/7VE.gif') center/cover no-repeat;
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .service-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
+        .feature-card {
+            background: rgba(248, 249, 250, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
             transition: var(--transition);
             box-shadow: var(--shadow);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .service-icon {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        /* About */
-        #about {
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             background: white;
         }
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            background: rgba(67, 97, 238, 0.1);
         }
 
-        .about-image {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
+        .feature-icon img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
         }
 
-        .about-image img {
+        /* How It Works Section */
+        #how-it-works {
+            background-color: var(--light);
+            background-image: url('https://i.gifer.com/7XDF.gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        #how-it-works::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100%;
+            background: rgba(248, 249, 250, 0.9);
         }
 
-        /* Clients */
-        #clients {
-            background: var(--light);
-            padding: 3rem 0;
-        }
-
-        .clients-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        .steps {
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
-            align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
-        .client-logo {
-            filter: grayscale(100%);
-            opacity: 0.6;
+        .step {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            position: relative;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
             transition: var(--transition);
         }
 
-        .client-logo:hover {
-            filter: grayscale(0%);
-            opacity: 1;
+        .step:hover {
+            transform: translateY(-5px);
         }
 
-        /* CTA */
-        #cta {
+        .step-number {
             background: var(--primary);
             color: white;
-            text-align: center;
-            padding: 3rem 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            flex-shrink: 0;
         }
 
-        #cta .section-title {
+        /* Testimonials */
+        #testimonials {
+            background: white;
+            background-image: url('https://i.gifer.com/7XDF.gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        #testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(67, 97, 238, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Pricing */
+        #pricing {
+            background: var(--light);
+            background-image: url('https://i.gifer.com/7XDF.gif');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        #pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(248, 249, 250, 0.9);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--primary);
             color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 1.5rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-features li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* CTA Section */
+        #cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.gifer.com/7VE.gif') center/cover no-repeat;
+            opacity: 0.1;
+        }
+
+        #cta .section-title::after {
+            background: white;
         }
 
         #cta p {
             color: rgba(255, 255, 255, 0.8);
             max-width: 700px;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 2rem;
+            position: relative;
         }
 
         #cta .btn {
             background: white;
             color: var(--primary);
-            font-weight: 600;
+            font-weight: 700;
+            position: relative;
+        }
+
+        #cta .btn:hover {
+            background: var(--light);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            background: var(--darker);
+            background: var(--dark);
             color: white;
-            padding: 3rem 0 1.5rem;
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.gifer.com/7VE.gif') center/cover no-repeat;
+            opacity: 0.05;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
         }
 
         .footer-col h3 {
             color: white;
-            margin-bottom: 1.2rem;
-            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
         }
 
         .footer-links {
@@ -319,31 +599,31 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.8rem;
         }
 
         .footer-links a {
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
             transition: var(--transition);
         }
 
         .footer-links a:hover {
             color: white;
+            padding-left: 5px;
         }
 
         .social-links {
             display: flex;
-            gap: 0.8rem;
-            margin-top: 1.2rem;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -352,28 +632,31 @@
 
         .social-links a:hover {
             background: var(--primary);
+            transform: translateY(-3px);
         }
 
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 1.5rem;
+            padding-top: 2rem;
             text-align: center;
             color: rgba(255, 255, 255, 0.5);
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            position: relative;
         }
 
-        /* Responsive */
+        /* Responsive Styles */
         @media (max-width: 992px) {
             h1 {
-                font-size: 2.2rem;
+                font-size: 2.8rem;
             }
 
             h2 {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
             }
 
-            .about-content {
-                grid-template-columns: 1fr;
+            .hero-image {
+                opacity: 0.3;
+                z-index: -1;
             }
         }
 
@@ -384,16 +667,15 @@
 
             .nav-links {
                 position: fixed;
-                top: 70px;
+                top: 80px;
                 left: -100%;
                 width: 100%;
-                height: calc(100vh - 70px);
+                height: calc(100vh - 80px);
                 background: white;
                 flex-direction: column;
                 align-items: center;
-                justify-content: flex-start;
-                gap: 1.5rem;
-                padding-top: 2rem;
+                justify-content: center;
+                gap: 3rem;
                 transition: var(--transition);
             }
 
@@ -409,19 +691,23 @@
             .hero-btns {
                 justify-content: center;
             }
+
+            .step {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 576px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
             }
 
             h2 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             .section {
-                padding: 3rem 0;
+                padding: 4rem 0;
             }
 
             .hero-btns {
@@ -437,157 +723,281 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header & Navigation -->
     <header id="header">
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">DataJuke<span>.</span></a>
+                <a href="#" class="logo">Nexa<span>.</span></a>
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
                 <ul class="nav-links" id="navLinks">
-                    <li><a href="#services">Layanan</a></li>
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="#clients">Klien</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                    <li><a href="#cta" class="btn">Demo Gratis</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#cta" class="btn btn-outline">Get Started</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section id="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Solusi Analitik Data untuk Bisnis Modern</h1>
-                <p>DataJuke membantu perusahaan Anda mengubah data menjadi wawasan yang dapat ditindaklanjuti dengan platform analitik kami yang canggih.</p>
+                <h1>Transform Your Digital Presence</h1>
+                <p>Nexa provides cutting-edge solutions to help your business thrive in the digital landscape. Our platform delivers results that matter.</p>
                 <div class="hero-btns">
-                    <a href="#cta" class="btn">Mulai Sekarang</a>
-                    <a href="#services" class="btn btn-outline">Pelajari Lebih Lanjut</a>
+                    <a href="#pricing" class="btn">Get Started</a>
+                    <a href="#features" class="btn btn-outline">Learn More</a>
                 </div>
             </div>
+            <img src="https://i.gifer.com/7XDF.gif" alt="Digital analytics dashboard animation" class="hero-image">
         </div>
     </section>
 
-    <!-- Services -->
-    <section id="services" class="section">
+    <!-- Features Section -->
+    <section id="features" class="section">
         <div class="container">
-            <h2 class="section-title text-center">Layanan Kami</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-bar"></i>
+            <h2 class="section-title text-center">Powerful Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://i.gifer.com/7XDF.gif" alt="Analytics GIF">
                     </div>
-                    <h3>Analisis Data</h3>
-                    <p>Layanan analisis data komprehensif untuk mengungkap wawasan bisnis yang berharga.</p>
+                    <h3>Advanced Analytics</h3>
+                    <p>Gain deep insights into your business performance with our comprehensive analytics dashboard.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-cloud"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://i.gifer.com/7VE.gif" alt="AI GIF">
                     </div>
-                    <h3>Integrasi Cloud</h3>
-                    <p>Solusi penyimpanan dan pengolahan data berbasis cloud yang aman dan scalable.</p>
+                    <h3>AI Integration</h3>
+                    <p>Leverage the power of artificial intelligence to automate processes and make data-driven decisions.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-robot"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://i.gifer.com/7XDF.gif" alt="Mobile GIF">
                     </div>
-                    <h3>AI & Machine Learning</h3>
-                    <p>Implementasi teknologi AI untuk prediksi dan otomatisasi proses bisnis.</p>
+                    <h3>Mobile Optimized</h3>
+                    <p>Access your data and manage your business from anywhere with our fully responsive platform.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-database"></i>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://i.gifer.com/7VE.gif" alt="Security GIF">
                     </div>
-                    <h3>Manajemen Data</h3>
-                    <p>Solusi pengelolaan data terintegrasi untuk organisasi Anda.</p>
+                    <h3>Enterprise Security</h3>
+                    <p>Your data is protected with industry-leading security measures and encryption protocols.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://i.gifer.com/7XDF.gif" alt="Workflow GIF">
+                    </div>
+                    <h3>Custom Workflows</h3>
+                    <p>Tailor the platform to your specific business needs with customizable workflows.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://i.gifer.com/7VE.gif" alt="Support GIF">
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Our dedicated support team is available around the clock to assist you with any questions.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="section">
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section">
         <div class="container">
-            <div class="about-content">
-                <div>
-                    <h2 class="section-title">Tentang DataJuke</h2>
-                    <p>DataJuke adalah penyedia solusi analitik data terkemuka yang membantu bisnis membuat keputusan berbasis data.</p>
-                    <p>Dengan tim ahli data dan analis berpengalaman, kami menyediakan solusi yang disesuaikan dengan kebutuhan unik setiap klien.</p>
-                    <a href="#cta" class="btn" style="margin-top: 1rem;">Hubungi Kami</a>
+            <h2 class="section-title text-center">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Sign Up</h3>
+                        <p>Create your account in minutes. No credit card required to start your free trial.</p>
+                    </div>
                 </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Analisis Data">
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>Connect Your Data</h3>
+                        <p>Integrate with your existing tools and platforms or start fresh with our templates.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Customize Your Dashboard</h3>
+                        <p>Tailor the platform to your specific needs with our easy-to-use customization tools.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h3>Launch & Optimize</h3>
+                        <p>Go live and continuously improve with our real-time analytics and suggestions.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Clients -->
-    <section id="clients" class="section">
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
         <div class="container">
-            <h2 class="section-title text-center">Klien Kami</h2>
-            <div class="clients-grid">
-                <img src="https://via.placeholder.com/150x60?text=Perusahaan+A" alt="Client Logo" class="client-logo">
-                <img src="https://via.placeholder.com/150x60?text=Perusahaan+B" alt="Client Logo" class="client-logo">
-                <img src="https://via.placeholder.com/150x60?text=Perusahaan+C" alt="Client Logo" class="client-logo">
-                <img src="https://via.placeholder.com/150x60?text=Perusahaan+D" alt="Client Logo" class="client-logo">
+            <h2 class="section-title text-center">What Our Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Nexa has completely transformed how we analyze our business data. The insights we've gained have led to a 30% increase in operational efficiency.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>CEO, TechSolutions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>The implementation was seamless and the support team was incredibly helpful throughout the process. Highly recommended!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Director of Ops, RetailCorp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>We've tried several analytics platforms, but none compare to the depth and usability of Nexa. It's become an indispensable tool for our team.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Emma Rodriguez</h4>
+                            <p>CMO, BrandVision</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Simple, Transparent Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$29<span>/month</span></div>
+                    <p>Perfect for small businesses and startups</p>
+                    <ul class="pricing-features">
+                        <li>Up to 10 users</li>
+                        <li>Basic analytics</li>
+                        <li>Email support</li>
+                        <li>5 integrations</li>
+                        <li>1GB storage</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Choose Plan</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="price">$79<span>/month</span></div>
+                    <p>Ideal for growing businesses</p>
+                    <ul class="pricing-features">
+                        <li>Up to 50 users</li>
+                        <li>Advanced analytics</li>
+                        <li>Priority support</li>
+                        <li>Unlimited integrations</li>
+                        <li>10GB storage</li>
+                        <li>API access</li>
+                    </ul>
+                    <a href="#" class="btn">Choose Plan</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$199<span>/month</span></div>
+                    <p>For large organizations</p>
+                    <ul class="pricing-features">
+                        <li>Unlimited users</li>
+                        <li>Premium analytics</li>
+                        <li>24/7 dedicated support</li>
+                        <li>Unlimited integrations</li>
+                        <li>100GB storage</li>
+                        <li>API access</li>
+                        <li>Custom reporting</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
     <section id="cta" class="section">
         <div class="container">
-            <h2 class="section-title text-center">Siap Mengubah Data Menjadi Wawasan?</h2>
-            <p>Jadwalkan demo gratis dengan tim kami dan lihat bagaimana DataJuke dapat membantu bisnis Anda tumbuh.</p>
-            <a href="#" class="btn">Jadwalkan Demo</a>
+            <h2 class="section-title text-center">Ready to Transform Your Business?</h2>
+            <p>Join thousands of businesses that trust Nexa for their digital transformation needs. Start your free 14-day trial today—no credit card required.</p>
+            <a href="#" class="btn">Start Free Trial</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer id="contact">
+    <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>DataJuke</h3>
-                    <p>Solusi analitik data untuk bisnis modern.</p>
+                    <h3>Nexa</h3>
+                    <p>Empowering businesses with cutting-edge digital solutions since 2018.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
-                    <h3>Layanan</h3>
+                    <h3>Product</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Analisis Data</a></li>
-                        <li><a href="#">Integrasi Cloud</a></li>
-                        <li><a href="#">AI & ML</a></li>
-                        <li><a href="#">Manajemen Data</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Updates</a></li>
+                        <li><a href="#">Roadmap</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h3>Perusahaan</h3>
+                    <h3>Company</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Tentang Kami</a></li>
-                        <li><a href="#">Tim</a></li>
-                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
                         <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h3>Kontak</h3>
+                    <h3>Resources</h3>
                     <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</li>
-                        <li><i class="fas fa-phone"></i> +62 21 1234 5678</li>
-                        <li><i class="fas fa-envelope"></i> info@datajuke.id</li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">API Docs</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 DataJuke. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat Layanan</a></p>
+                <p>&copy; 2023 Nexa. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
             </div>
         </div>
     </footer>
@@ -614,6 +1024,16 @@
             });
         });
 
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -625,12 +1045,37 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 70,
+                        top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
                 }
             });
         });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.feature-card, .step, .testimonial-card, .pricing-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Set initial state for animated elements
+        document.querySelectorAll('.feature-card, .step, .testimonial-card, .pricing-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
